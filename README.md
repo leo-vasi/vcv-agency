@@ -83,7 +83,7 @@ public String showCreateNationalForm(Model model) {
 ## 🛠️ Tecnologias Utilizadas
 
 ### Backend:
-- Java 17
+- Java 21
 - Spring Boot 3.x
 - Spring Data JPA + Hibernate
 - Lombok (`@RequiredArgsConstructor`, `@Builder`, `@Getter`, `@Setter` etc)
