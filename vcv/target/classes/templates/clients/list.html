@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - VCV</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Cabeçalho com navegação -->
+<header class="header">
+    <div class="container header-content">
+        <img th:src="@{/assets/images/vcv-logo.png}" alt="VCV Logo" class="logo">
+        <nav class="nav-menu">
+            <a th:href="@{/clients}" class="nav-link active">Clientes</a>
+            <a th:href="@{/accommodations}" class="nav-link">Hospedagens</a>
+            <a th:href="@{/transports}" class="nav-link">Transportes</a>
+            <a th:href="@{/travels}" class="nav-link">Viagens</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <h1>Clientes</h1>
+
+    <div th:if="${successMessage}" class="alert alert-success">
+        <span th:text="${successMessage}"></span>
+    </div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <span th:text="${errorMessage}"></span>
+    </div>
+
+    <div class="actions-bar">
+        <a th:href="@{/clients/create}" class="btn btn-primary">Novo Cliente</a>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Nº Passaporte</th>
+            <th>Criado em</th>
+            <th>Atualizado em</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.id}"></td>
+            <td th:text="${client.name}"></td>
+            <td th:text="${client.email}"></td>
+            <td th:text="${client.phone} ?: 'Não informado'"></td>
+            <td th:text="${client.passportNumber} ?: 'Não informado'"></td>
+            <td th:text="${#temporals.format(client.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${client.alteredAt != null} ? ${#temporals.format(client.alteredAt, 'dd/MM/yyyy HH:mm')} : 'Não alterado'"></td>
+            <td class="actions">
+                <a th:href="@{/clients/edit/{id}(id=${client.id})}" class="btn btn-sm btn-warning">Editar</a>
+                <form th:action="@{/clients/delete/{id}(id=${client.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2023 VCV Viagens. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

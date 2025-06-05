@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Viagens - VCV</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Cabeçalho com navegação -->
+<header class="header">
+    <div class="container header-content">
+        <img th:src="@{/assets/images/vcv-logo.png}" alt="VCV Logo" class="logo">
+        <nav class="nav-menu">
+            <a th:href="@{/clients}" class="nav-link">Clientes</a>
+            <a th:href="@{/accommodations}" class="nav-link">Hospedagens</a>
+            <a th:href="@{/transports}" class="nav-link">Transportes</a>
+            <a th:href="@{/travels}" class="nav-link active">Viagens</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 th:text="'Viagens ' + (${travelType} ?: '')">Lista de Viagens</h1>
+        <div>
+            <a th:href="@{/travels/national/create}" class="btn btn-primary me-2">Nova Nacional</a>
+            <a th:href="@{/travels/international/create}" class="btn btn-info">Nova Internacional</a>
+        </div>
+    </div>
+
+    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+    <div class="table-container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Destino</th>
+                <th>Tipo</th>
+                <th>Data Partida</th>
+                <th>Data Retorno</th>
+                <th>Preço</th>
+                <th>Registro</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="travel : ${travels}">
+                <td th:text="${travel.destination}"></td>
+                <td>
+                    <span th:if="${travel.international}" class="badge bg-info">Internacional</span>
+                    <span th:unless="${travel.international}" class="badge bg-secondary">Nacional</span>
+                </td>
+                <td th:text="${#temporals.format(travel.departureDate, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#temporals.format(travel.returnDate, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#numbers.formatCurrency(travel.price)}"></td>
+                <td>
+                    <small>
+                        <div>Criado em: <span th:text="${#temporals.format(travel.createdAt, 'dd/MM/yyyy HH:mm')}"></span></div>
+                        <div th:if="${travel.alteredAt != null}">
+                            Atualizado em: <span th:text="${#temporals.format(travel.alteredAt, 'dd/MM/yyyy HH:mm')}"></span>
+                        </div>
+                    </small>
+                </td>
+                <td class="actions">
+                    <a th:href="@{'/travels/' + ${travel.id}}" class="btn btn-sm btn-primary">Ver</a>
+                    <a th:href="@{'/travels/' + (travel.international ? 'international' : 'national') + '/edit/' + ${travel.id}}"
+                       class="btn btn-sm btn-warning">Editar</a>
+                    <form th:action="@{/travels/delete/{id}(id=${travel.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Tem certeza?')">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2023 VCV Viagens. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

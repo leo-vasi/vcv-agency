@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Viagem - VCV</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Cabeçalho com navegação -->
+<header class="header">
+    <div class="container header-content">
+        <img th:src="@{/assets/images/vcv-logo.png}" alt="VCV Logo" class="logo">
+        <nav class="nav-menu">
+            <a th:href="@{/clients}" class="nav-link">Clientes</a>
+            <a th:href="@{/accommodations}" class="nav-link">Hospedagens</a>
+            <a th:href="@{/transports}" class="nav-link">Transportes</a>
+            <a th:href="@{/travels}" class="nav-link active">Viagens</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Detalhes da Viagem</h1>
+        <a th:href="@{/travels}" class="btn btn-secondary">Voltar</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h2 class="card-title mb-1" th:text="${travel.destination}"></h2>
+                    <div class="mb-3">
+                            <span th:if="${travel instanceof T(com.leo.vcv.model.InternationalTravel)}"
+                                  class="badge bg-info">Internacional</span>
+                        <span th:unless="${travel instanceof T(com.leo.vcv.model.InternationalTravel)}"
+                              class="badge bg-secondary">Nacional</span>
+                        <span th:if="${travel instanceof T(com.leo.vcv.model.InternationalTravel) and travel.needsVisa}"
+                              class="badge bg-warning ms-1">Visto necessário</span>
+                    </div>
+                </div>
+                <div th:text="${#numbers.formatCurrency(travel.price)}" class="price"></div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-3">Informações da Viagem</h5>
+                    <p><strong>Data de Partida:</strong>
+                        <span th:text="${#temporals.format(travel.departureDate, 'dd/MM/yyyy')}"></span></p>
+                    <p><strong>Data de Retorno:</strong>
+                        <span th:text="${#temporals.format(travel.returnDate, 'dd/MM/yyyy')}"></span></p>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mb-3">Detalhes Adicionais</h5>
+                    <p><strong>Cliente:</strong>
+                        <span th:text="${travel.client.name}"></span></p>
+                    <p th:if="${travel.transport != null}">
+                        <strong>Transporte:</strong>
+                        <span th:text="${travel.transport.company + ' (' + travel.transport.type + ')'}"></span>
+                    </p>
+                    <p th:if="${travel.accommodation != null}">
+                        <strong>Acomodação:</strong>
+                        <span th:text="${travel.accommodation.hotelName + ' (' + travel.accommodation.category + ' estrelas)'}"></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top">
+                <a th:href="@{${travel.international} ? '/travels/international/edit/' + ${travel.id} : '/travels/national/edit/' + ${travel.id}}"
+                   class="btn btn-warning me-2">Editar</a>
+                <form th:action="@{/travels/delete/{id}(id=${travel.id})}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-danger me-2"
+                            onclick="return confirm('Tem certeza que deseja excluir esta viagem?')">Excluir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2023 VCV Viagens. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

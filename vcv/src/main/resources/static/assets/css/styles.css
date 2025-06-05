@@ -1,0 +1,413 @@
+/* Estilos Gerais com Tema CVC Oficial */
+:root {
+    --cvc-blue: #0038A8;       /* Azul escuro CVC */
+    --cvc-blue-light: #0066CC;  /* Azul claro CVC */
+    --cvc-yellow: #FFD100;     /* Amarelo CVC */
+    --cvc-yellow-dark: #E6BC00; /* Amarelo escuro */
+    --cvc-white: #FFFFFF;      /* Branco */
+    --cvc-gray-light: #F5F5F5; /* Cinza claro */
+    --cvc-gray: #E0E0E0;       /* Cinza médio */
+    --cvc-gray-dark: #757575;  /* Cinza escuro */
+    --cvc-dark: #212121;       /* Preto/Texto */
+}
+
+body {
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--cvc-dark);
+    background-color: var(--cvc-white);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Cabeçalho - Estilo CVC Oficial */
+.header {
+    background-color: var(--cvc-white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--cvc-yellow);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 45px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--cvc-blue);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.nav-link:hover {
+    color: var(--cvc-blue-light);
+    background-color: rgba(0, 56, 168, 0.05);
+}
+
+.nav-link.active {
+    color: var(--cvc-white);
+    background-color: var(--cvc-blue);
+}
+
+/* Títulos */
+h1, h2, h3, h4 {
+    color: var(--cvc-blue);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.4rem;
+    border-bottom: 3px solid var(--cvc-yellow);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+    color: var(--cvc-blue-light);
+}
+
+/* Formulários - Estilo CVC */
+.form-container {
+    background-color: var(--cvc-white);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    border-top: 4px solid var(--cvc-blue);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--cvc-blue);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--cvc-gray);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--cvc-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 56, 168, 0.2);
+}
+
+/* Botões - Estilo CVC */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--cvc-blue);
+    color: var(--cvc-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--cvc-blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 56, 168, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--cvc-yellow);
+    color: var(--cvc-dark);
+}
+
+.btn-secondary:hover {
+    background-color: var(--cvc-yellow-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 209, 0, 0.3);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--cvc-blue);
+    color: var(--cvc-blue);
+}
+
+.btn-outline:hover {
+    background-color: var(--cvc-blue);
+    color: var(--cvc-white);
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+}
+
+/* Alertas */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    border-left: 4px solid transparent;
+}
+
+.alert-info {
+    background-color: #E3F2FD;
+    color: var(--cvc-blue);
+    border-left-color: var(--cvc-blue);
+}
+
+.alert-warning {
+    background-color: #FFF8E1;
+    color: #FF8F00;
+    border-left-color: var(--cvc-yellow);
+}
+
+/* Tabelas - Estilo CVC */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    background-color: var(--cvc-white);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: left;
+}
+
+.table th {
+    background-color: var(--cvc-blue);
+    color: var(--cvc-white);
+    font-weight: 600;
+}
+
+.table tr {
+    border-bottom: 1px solid var(--cvc-gray);
+}
+
+.table tr:nth-of-type(even) {
+    background-color: var(--cvc-gray-light);
+}
+
+.table tr:last-of-type {
+    border-bottom: 3px solid var(--cvc-blue);
+}
+
+.table tr:hover {
+    background-color: rgba(0, 56, 168, 0.05);
+}
+
+/* Cards - Estilo CVC */
+.card {
+    background: var(--cvc-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 25px;
+    border-top: 3px solid var(--cvc-yellow);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    background-color: var(--cvc-blue);
+    color: var(--cvc-white);
+    padding: 15px 20px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Rodapé - Estilo CVC */
+.footer {
+    background-color: var(--cvc-blue);
+    color: var(--cvc-white);
+    padding: 40px 0 20px;
+    margin-top: 50px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h3 {
+    color: var(--cvc-white);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--cvc-yellow);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--cvc-yellow);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Destaques */
+.highlight {
+    background-color: rgba(255, 209, 0, 0.1);
+    padding: 15px;
+    border-left: 4px solid var(--cvc-yellow);
+    margin: 20px 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .nav-link {
+        display: block;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animated {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Elementos Específicos CVC */
+.cta-banner {
+    background-color: var(--cvc-blue);
+    color: var(--cvc-white);
+    padding: 30px;
+    border-radius: 8px;
+    margin: 30px 0;
+    text-align: center;
+    background-image: linear-gradient(to right, var(--cvc-blue), var(--cvc-blue-light));
+}
+
+.cta-banner h2 {
+    color: var(--cvc-white);
+    border-bottom: 2px solid var(--cvc-yellow);
+}
+
+.price-tag {
+    color: var(--cvc-blue);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.price-tag .small {
+    font-size: 1rem;
+    color: var(--cvc-gray-dark);
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-primary {
+    background-color: var(--cvc-blue);
+    color: var(--cvc-white);
+}
+
+.badge-secondary {
+    background-color: var(--cvc-yellow);
+    color: var(--cvc-dark);
+}

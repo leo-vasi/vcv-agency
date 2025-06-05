@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Transporte - VCV</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Cabeçalho com navegação -->
+<header class="header">
+    <div class="container header-content">
+        <img th:src="@{/assets/images/vcv-logo.png}" alt="VCV Logo" class="logo">
+        <nav class="nav-menu">
+            <a th:href="@{/clients}" class="nav-link">Clientes</a>
+            <a th:href="@{/accommodations}" class="nav-link">Hospedagens</a>
+            <a th:href="@{/transports}" class="nav-link active">Transportes</a>
+            <a th:href="@{/travels}" class="nav-link">Viagens</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <h1>Editar Transporte</h1>
+
+    <div class="form-container">
+        <form th:action="@{/transports/update/{id}(id=${transport.id})}" method="post" th:object="${transport}">
+            <div class="form-group">
+                <label>Tipo:</label>
+                <select th:field="*{type}" class="form-control" required>
+                    <option th:each="type : ${transportTypes}"
+                            th:value="${type}"
+                            th:text="${type}"
+                            th:selected="${type == transport.type}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Companhia:</label>
+                <input type="text" th:field="*{company}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>Número:</label>
+                <input type="text" th:field="*{number}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Classe:</label>
+                <select th:field="*{classType}" class="form-control">
+                    <option th:each="classType : ${classTypes}"
+                            th:value="${classType}"
+                            th:text="${classType}"></option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+                <a th:href="@{/transports}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2023 VCV Viagens. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

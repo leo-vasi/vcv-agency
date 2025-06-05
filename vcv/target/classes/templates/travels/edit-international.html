@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Viagem Internacional - VCV</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Cabeçalho com navegação -->
+<header class="header">
+    <div class="container header-content">
+        <img th:src="@{/assets/images/vcv-logo.png}" alt="VCV Logo" class="logo">
+        <nav class="nav-menu">
+            <a th:href="@{/clients}" class="nav-link">Clientes</a>
+            <a th:href="@{/accommodations}" class="nav-link">Hospedagens</a>
+            <a th:href="@{/transports}" class="nav-link">Transportes</a>
+            <a th:href="@{/travels}" class="nav-link active">Viagens</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <h1>Editar Viagem Internacional</h1>
+
+    <div class="form-container">
+        <form th:action="@{'/travels/international/update/' + ${travel.id}}" method="post" th:object="${travel}">
+            <!-- Campos comuns -->
+            <div class="form-group">
+                <label>Destino:</label>
+                <input type="text" class="form-control" th:field="*{destination}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Data de Partida:</label>
+                <input type="date" class="form-control" th:field="*{departureDate}"
+                       th:min="${#temporals.format(today, 'yyyy-MM-dd')}"
+                       th:value="${#temporals.format(travel.departureDate, 'yyyy-MM-dd')}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Data de Retorno:</label>
+                <input type="date" class="form-control" th:field="*{returnDate}"
+                       th:min="${#temporals.format(today, 'yyyy-MM-dd')}"
+                       th:value="${#temporals.format(travel.returnDate, 'yyyy-MM-dd')}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Preço:</label>
+                <input type="number" step="0.01" min="0" class="form-control" th:field="*{price}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Cliente:</label>
+                <select class="form-control" th:field="*{client.id}" required>
+                    <option th:each="client : ${clients}"
+                            th:value="${client.id}"
+                            th:text="${client.name}"
+                            th:selected="${travel.client.id == client.id}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Transporte (Opcional):</label>
+                <select class="form-control" th:field="*{transport.id}">
+                    <option value="">-- Selecione --</option>
+                    <option th:each="transport : ${transports}"
+                            th:value="${transport.id}"
+                            th:text="${transport.company + ' (' + transport.type + ')'}"
+                            th:selected="${travel.transport != null and travel.transport.id == transport.id}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Acomodação (Opcional):</label>
+                <select class="form-control" th:field="*{accommodation.id}">
+                    <option value="">-- Selecione --</option>
+                    <option th:each="accommodation : ${accommodations}"
+                            th:value="${accommodation.id}"
+                            th:text="${accommodation.hotelName + ' (' + accommodation.category + ' estrelas)'}"
+                            th:selected="${travel.accommodation != null and travel.accommodation.id == accommodation.id}"></option>
+                </select>
+            </div>
+
+            <!-- Campo específico para internacional -->
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="needsVisa" th:field="*{needsVisa}">
+                <label class="form-check-label" for="needsVisa">Necessita de Visto</label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                <a th:href="@{/travels}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2023 VCV Viagens. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>
