@@ -1,12 +1,12 @@
 # VCV - CRUD com Design Patterns + Spring
 
-## 📜 Descrição
+## Descrição
 
 Sistema de gestão de viagens (nacionais e internacionais) com **Spring Boot**, **JPA** e **Thymeleaf**.
 
 ---
 
-## ⚙️ Funcionalidades
+## Funcionalidades
 
 - CRUD para:
   - **Clientes** (`Client`)
@@ -19,7 +19,7 @@ Sistema de gestão de viagens (nacionais e internacionais) com **Spring Boot**, 
 
 ---
 
-## 🎯 Objetivo Didático
+## Objetivo Didático
 
 - **Factory Method**: Criação flexível de viagens
 - **Strategy Pattern**: Regras de negócio especializadas
@@ -29,7 +29,7 @@ Sistema de gestão de viagens (nacionais e internacionais) com **Spring Boot**, 
 
 ---
 
-## 🏗️ Modelo de Dados
+## Modelo de Dados
 
 | Entidade             | Descrição                                   | Relacionamentos                           |
 | -------------------- | ------------------------------------------- | ------------------------------------------ |
@@ -42,15 +42,15 @@ Sistema de gestão de viagens (nacionais e internacionais) com **Spring Boot**, 
 
 ---
 
-## ✨ Destaques de Design Patterns
+## Destaques de Design Patterns
 
-### 1️⃣ Factory Method
+### 1. Factory Method
 - **Classe:** `TravelFactory`
 - **Finalidade:** Centralizar a criação complexa de viagens.
 
 ---
 
-### 2️⃣ Strategy Pattern (Camada Service)
+### 2️. Strategy Pattern (Camada Service)
 - **Interface:** `TravelStrategy`
 - **Implementações:**
   - `InternationalTravelStrategy`: Valida preço mínimo (≥ 500) e exigência de visto.
@@ -58,13 +58,13 @@ Sistema de gestão de viagens (nacionais e internacionais) com **Spring Boot**, 
 
 ---
 
-### 3️⃣ Facade Pattern
+### 3️. Facade Pattern
 - **Classe:** `TravelService`
 - **Finalidade:** Unificar operações complexas em uma interface simplificada.
 
 ---
 
-### 4️⃣ Template Method Pattern (Camada Controller)
+### 4️. Template Method Pattern (Camada Controller)
 - **Classe:** `TravelController`
 - **Métodos-chave:**
   - `showCreateForm()`: Prepara modelo comum para formulários.
@@ -80,7 +80,7 @@ public String showCreateNationalForm(Model model) {
 }
 ```
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend:
 - Java 21
